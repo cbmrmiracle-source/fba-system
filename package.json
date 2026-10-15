@@ -1,0 +1,35 @@
+{
+  "name": "fba-system",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "migrate": "tsx scripts/migrate.ts",
+    "import": "tsx scripts/import-file.ts",
+    "backfill:sales": "tsx scripts/backfill-sales.ts",
+    "sync:sheets": "tsx scripts/sync-sheets.ts",
+    "test": "vitest run",
+    "parity": "tsx scripts/parity-check.ts"
+  },
+  "dependencies": {
+    "googleapis": "144.0.0",
+    "next": "14.2.35",
+    "papaparse": "5.4.1",
+    "pg": "8.13.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "xlsx": "0.18.5"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.6",
+    "@types/papaparse": "5.3.15",
+    "@types/pg": "8.11.10",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "tsx": "4.19.2",
+    "typescript": "5.6.3",
+    "vitest": "2.1.5"
+  }
+}

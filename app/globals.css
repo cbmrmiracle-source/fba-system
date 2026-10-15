@@ -1,0 +1,28 @@
+:root { --bg: #fafaf9; --card: #fff; --ink: #1c1917; --muted: #78716c; --line: #e7e5e4; --accent: #2563eb;
+  --bad: #b91c1c; --warn: #b45309; --good: #15803d; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #1c1917; --card: #292524; --ink: #f5f5f4; --muted: #a8a29e; --line: #44403c; --accent: #60a5fa;
+    --bad: #f87171; --warn: #fbbf24; --good: #4ade80; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 14px/1.45 system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+nav { display: flex; gap: 20px; align-items: center; padding: 12px 20px; border-bottom: 1px solid var(--line); background: var(--card); }
+nav a { color: var(--ink); text-decoration: none; } nav a:hover { color: var(--accent); }
+main { padding: 20px; max-width: 1400px; margin: 0 auto; }
+h1 { font-size: 20px; margin: 0 0 4px; } .sub { color: var(--muted); margin: 0 0 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+.narrow { max-width: 360px; margin: 60px auto; display: grid; gap: 10px; }
+input, select, button { font: inherit; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--ink); }
+button { background: var(--accent); color: #fff; border: none; cursor: pointer; }
+.error { color: var(--bad); } .ok { color: var(--good); }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; background: var(--card); }
+th, td { padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+th { position: sticky; top: 0; background: var(--card); font-weight: 600; font-size: 12px; color: var(--muted); }
+td.l, th.l { text-align: left; } td.title { max-width: 280px; overflow: hidden; text-overflow: ellipsis; }
+.low { color: var(--bad); font-weight: 600; } .mid { color: var(--warn); font-weight: 600; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.tile .v { font-size: 22px; font-weight: 600; } .tile .k { color: var(--muted); font-size: 12px; }
+.controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+img.thumb { width: 36px; height: 36px; object-fit: contain; }
+a.asin { color: var(--accent); }
