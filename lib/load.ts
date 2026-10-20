@@ -9,7 +9,9 @@ export interface LoadResult { importId: number; reportType: ReportType; reportDa
  * Loads one report for one date. Re-loading the same report type and date replaces it.
  * For inventory_health the date comes from the file's snapshot-date; for sales reports it must be given.
  */
-export async function loadReport(type: ReportType, table: Table, source: string, date?: string): Promise<LoadResult> {
+export async function loadReport(
+  type: ReportType, table: Table, source: string, date?: string, opts: { keepRaw?: boolean } = {},
+): Promise<LoadResult> {
   const missing = missingColumns(type, table.headers);
   if (missing.length) throw new Error(`File is missing column(s): ${missing.join(", ")}`);
 
@@ -28,7 +30,7 @@ export async function loadReport(type: ReportType, table: Table, source: string,
       "INSERT INTO report_imports (report_type, report_date, source, row_count) VALUES ($1,$2,$3,$4) RETURNING id",
       [type, reportDate, source, table.rows.length]);
     const importId = Number(rows[0].id);
-    await insertRaw(c, importId, table);
+    if (opts.keepRaw !== false) await insertRaw(c, importId, table);
 
     if (type === "inventory_health") {
       await c.query("DELETE FROM inventory_daily WHERE snapshot_date = $1", [reportDate]);

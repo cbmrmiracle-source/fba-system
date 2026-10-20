@@ -58,7 +58,9 @@ async function main() {
         const table = fromGrid(res.data.values ?? []);
         const type = detectReport(table.headers);
         if (type !== "all_orders" && type !== "nineyard_profit_by_sku") continue;
-        await loadReport(type, table, d.url, d.date);
+        // History keeps per-ASIN daily totals only; the raw order lines stay in the daily sheets.
+        // This keeps 900+ days well inside a free database plan.
+        await loadReport(type, table, d.url, d.date, { keepRaw: false });
         const total = dailySales(type, table).reduce((s, r) => s + r.sales, 0);
         const diff = Math.round((total - d.summaryTotal) * 100) / 100;
         report.push(`${d.date},${d.summaryTotal},${total.toFixed(2)},${diff},${type},${table.rows.length},${tab}`);
