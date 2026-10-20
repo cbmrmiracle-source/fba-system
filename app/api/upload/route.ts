@@ -8,6 +8,8 @@ export const runtime = "nodejs";
 export async function POST(req: NextRequest) {
   const form = await req.formData();
   const date = (form.get("date") as string | null) || undefined;
+  // keepRaw=0 stores only per-ASIN daily totals (used when loading history).
+  const keepRaw = form.get("keepRaw") !== "0";
   const results: { file: string; ok: boolean; message: string }[] = [];
   for (const entry of form.getAll("files")) {
     if (!(entry instanceof File)) continue;
@@ -23,7 +25,7 @@ export async function POST(req: NextRequest) {
         results.push({ file: entry.name, ok: false, message: "Pick the sales date for this file, then upload again." });
         continue;
       }
-      const r = await loadReport(type, table, entry.name, date);
+      const r = await loadReport(type, table, entry.name, date, { keepRaw });
       results.push({ file: entry.name, ok: true,
         message: `${REPORT_SPECS[type].label}: ${r.rows} rows loaded for ${r.reportDate}` });
     } catch (e) {
