@@ -38,6 +38,7 @@ npm run dev                    # http://localhost:3000
 ```
 
 Deploy on Netlify (free plan) or Vercel: import the repo from GitHub, set `DATABASE_URL` and `APP_PASSWORD` as environment variables, deploy.
+`npm run build` runs the migrations first, so the tables are created on each deploy.
 
 ### Loading history and manual lists (read-only Google access)
 
